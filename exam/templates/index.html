@@ -1,0 +1,53 @@
+{% extends 'partial/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="relative bg-gradient-to-r from-purple-900 to-indigo-800 py-16 font-[sans-serif]">
+  <div class="absolute inset-0">
+    <img src="https://readymadeui.com/cardImg.webp" alt="Background Image" class="w-full h-full object-cover opacity-50" />
+  </div>
+
+  <div class="relative max-w-screen-xl mx-auto px-8 z-10 text-center text-white">
+    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Welcome to Our Premium Service</h1>
+    <p class="text-lg md:text-xl mb-12">Experience excellence like never before with our exclusive Exams.</p>
+    <button type="button" class="bg-indigo-600 hover:bg-indigo-700 text-white text-base tracking-wide px-6 py-3 rounded-full transition duration-300 ease-in-out shadow-lg hover:shadow-xl">Get Started</button>
+  </div>
+</div>
+<div class="bg-white font-[sans-serif] my-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center">
+        <h2 class="text-3xl font-extrabold text-[#333] inline-block relative after:absolute after:w-4/6 after:h-1 after:left-0 after:right-0 after:-bottom-4 after:mx-auto after:bg-pink-400 after:rounded-full">LATEST Exams</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 max-md:max-w-lg mx-auto">
+        {% for exam in exams %}
+        <a href="{% url 'take_exam' exam.id %}">
+        <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+          <img src="https://readymadeui.com/Imagination.webp" alt="Blog Post 1" class="w-full h-60 object-cover" />
+          <div class="p-6">
+            <span class="text-sm block text-gray-400 mb-2">10 FEB 2023 | BY JOHN DOE</span>
+            <h3 class="text-xl font-bold text-[#333]">{{exam.title}}</h3>
+            <hr class="my-6" />
+            <p class="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
+          </div>
+        </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+{% if user.is_authenticated %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Swal.fire({
+            title: `Welcome Back, {{ user.username }}!`,
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000, // 5 seconds
+            timerProgressBar: true
+        });
+    });
+</script>
+{% endif %}
+{% endblock %}

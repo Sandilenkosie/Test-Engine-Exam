@@ -1,0 +1,23 @@
+{% extends 'partial/base.html' %}
+{% block title %}Box{% endblock %}
+{% block content %}
+<div class="container mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4">Taken Exams</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for result in exam_results %}
+            <div class="bg-gray-100 shadow rounded-lg p-4 flex flex-col items-start">
+                <span class="text-lg font-semibold mb-2">{{ result.exam.title }}</span>
+                <p class="text-sm text-gray-600 mb-4">Taken on: {{ result.taken_date|date:"F j, Y" }}</p>
+                <a href="{% url 'exam_result' result.exam_result_id %}" 
+                   class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+                   View
+                </a>
+            </div>
+        {% empty %}
+            <div class="bg-red-100 text-red-700 p-4 rounded-lg">
+                You haven't taken any exams yet.
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

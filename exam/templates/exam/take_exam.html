@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Step Exam Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background-image: url('/static/media/exams/pexels-pixabay-161901.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        .step-content {
+            display: none;
+        }
+        .step-content.active {
+            display: block;
+        }
+        .question h3 {
+            font-family: 'Georgia', serif;
+            color: #333;
+        }
+        .question p {
+            font-family: 'Arial', sans-serif;
+            color: #555;
+        }
+        .step-navigation ul {
+            list-style: none;
+            padding: 0;
+        }
+        .step-navigation li {
+            display: flex;
+            align-items: center;
+        }
+        .step-navigation svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+        .step-navigation .cursor-pointer {
+            cursor: pointer;
+        }
+        .step-navigation .text-sm {
+            font-size: 0.875rem;
+        }
+        .timer {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: red;
+            text-align: center;
+            margin: 1rem;
+            position: fixed; /* Position the timer fixed to the viewport */
+            top: 1rem; /* Distance from the top */
+            left: 1rem; /* Distance from the left */
+            z-index: 1000; /* Ensure it's on top of other content */
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly opaque background */
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+
+<div class="form-container">
+    <h2 class="text-3xl font-bold mb-6 text-center">{{ exam.title }}</h2>
+    <hr class="border-b-3 my-4" />
+
+    <!-- Timer Display -->
+    <div id="timer" class="timer">Time Remaining: 00:00</div>
+
+    <form method="post" id="multi-step-form" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- Loop through all questions -->
+        {% for question in questions %}
+            <div class="step-content {% if forloop.first %}active{% endif %}">
+                <div class="question">
+                    <h3 class="text-lg font-semibold mb-4" aria-live="polite">Question {{ forloop.counter }}: {{ question.text|lower|capfirst }}</h3>
+                    <hr class="border-b-2 my-4" />
+                    <div class="space-y-2">
+                        {% for answer in question.answer_set.all %}
+                            {% if question.multiple_correct %}
+                                <div class="flex items-center">
+                                    <input id="checkbox_{{ question.id }}_{{ answer.id }}" type="checkbox" class="hidden peer" name="answers_{{ question.id }}" value="{{ answer.id }}"/>
+                                    <label id="label_{{ question.id }}_{{ answer.id }}" for="checkbox_{{ question.id }}_{{ answer.id }}"
+                                      class="relative flex items-center justify-center p-1 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-6 h-6 cursor-pointer bg-orange-500 border rounded-full overflow-hidden">
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
+                                        <path d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z" />
+                                      </svg>
+                                    </label>
+                                    <p class="text-sm text-black ml-4">{{ answer.text|lower|capfirst }}</p>
+                                </div>
+                            {% else %}
+                                <div class="flex items-center">
+                                    <input id="radio_{{ question.id }}_{{ answer.id }}" type="radio" name="answer_{{ question.id }}" value="{{ answer.id }}" class="w-5 h-5 hidden peer" aria-labelledby="label_{{ question.id }}_{{ answer.id }}"/>
+                                    <label id="label_{{ question.id }}_{{ answer.id }}" for="radio_{{ question.id }}_{{ answer.id }}" class="relative flex items-center justify-center peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-6 h-6 cursor-pointer border-2 border-orange-500 rounded-full overflow-hidden">
+                                        <span class="border-[6px] border-orange-500 rounded-full w-full h-full"></span>
+                                    </label>
+                                    <span class="ml-3 text-gray-700">{{ answer.text|lower|capfirst }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- Navigation Buttons -->
+        <div class="step-navigation flex items-center justify-center mt-4 space-x-4">
+            <ul class="flex items-center justify-center space-x-4 font-[sans-serif] mt-4">
+                <li class="text-gray-500 bg-gray-100 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center"style="display: none;" id="prev-btn">
+                    Back
+                </li>
+                <li class="text-gray-500 text-3xl " style="display: none;">/</li>
+                <li class="text-gray-500 bg-gray-100 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center" id="reset-btn">
+                    Reset
+                </li>
+                <li class="text-gray-500 text-3xl">/</li>
+                <li class="text-white bg-gray-700 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center" id="next-btn">
+                    Next
+                </li>
+                <li class="text-white bg-green-500 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center hidden" id="submit-btn">
+                    Submit
+                </li>
+            </ul>
+        </div>
+
+    </form>
+</div>
+
+<script>
+let currentStep = 0;
+const steps = document.querySelectorAll('.step-content');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const submitBtn = document.getElementById('submit-btn');
+const resetBtn = document.getElementById('reset-btn');
+const form = document.getElementById('multi-step-form');
+const timerDisplay = document.getElementById('timer');
+
+const examDuration = 60 * 60 * 1000; // 15 minutes in milliseconds
+let timerInterval;
+let timeLeft = examDuration;
+
+function updateButtons() {
+    prevBtn.style.display = currentStep > 0 ? 'block' : 'none';
+    nextBtn.style.display = currentStep < steps.length - 1 ? 'block' : 'none';
+    submitBtn.style.display = currentStep === steps.length - 1 ? 'block' : 'none';
+}
+
+function changeStep(step) {
+    steps[currentStep].classList.remove('active');
+    currentStep = step;
+    steps[currentStep].classList.add('active');
+    updateButtons();
+}
+
+function saveFormData() {
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+    localStorage.setItem('formData', JSON.stringify(data));
+}
+
+function loadFormData() {
+    const savedData = localStorage.getItem('formData');
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        Object.keys(data).forEach(key => {
+            const element = document.querySelector(`[name="${key}"][value="${data[key]}"]`);
+            if (element) {
+                if (element.type === 'checkbox' || element.type === 'radio') {
+                    element.checked = true;
+                } else {
+                    element.value = data[key];
+                }
+            }
+        });
+    }
+}
+
+function startTimer() {
+    const now = Date.now();
+    const endTime = now + timeLeft;
+
+    timerInterval = setInterval(() => {
+        const currentTime = Date.now();
+        timeLeft = endTime - currentTime;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            timerDisplay.textContent = 'Time is up!';
+            Swal.fire({
+                title: 'Time is up!',
+                text: 'The exam time has expired.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                form.submit();
+            });
+            return;
+        }
+
+        const minutes = Math.floor(timeLeft / 60000);
+        const seconds = Math.floor((timeLeft % 60000) / 1000);
+        timerDisplay.textContent = `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+}
+
+function resetForm() {
+    localStorage.removeItem('formData'); // Clear localStorage
+    form.reset(); // Reset form fields
+    document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+        input.checked = false;
+    });
+    changeStep(0); // Reset to first step
+    startTimer(); // Restart timer
+}
+
+nextBtn.addEventListener('click', () => {
+    if (currentStep < steps.length - 1) {
+        saveFormData(); // Save data when moving to next step
+        changeStep(currentStep + 1);
+    }
+});
+
+prevBtn.addEventListener('click', () => {
+    if (currentStep > 0) {
+        saveFormData(); // Save data when moving to previous step
+        changeStep(currentStep - 1);
+    }
+});
+
+resetBtn.addEventListener('click', () => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "All progress will be lost!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, reset it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            resetForm(); // Reset form and restart timer
+            Swal.fire(
+                'Reset!',
+                'Your form has been reset.',
+                'success'
+            );
+        }
+    });
+});
+
+submitBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to submit the form?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, submit it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.removeItem('formData'); // Clear localStorage
+            form.submit(); // Submit the form
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadFormData(); // Load saved data when the page loads
+    changeStep(0); // Initialize first step
+    startTimer(); // Start the timer
+});
+</script>
+
+</body>
+</html>

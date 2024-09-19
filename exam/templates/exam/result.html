@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
+    <style>
+        body {
+            background-image: url('/static/media/exams/pexels-pixabay-161901.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Ensure the background image remains fixed */
+            background-repeat: no-repeat; /* Prevent repeating the background image */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Ensure the body takes up the full height of the viewport */
+            display: flex;
+            align-items: flex-start; /* Align items to the start (top) */
+            justify-content: center; /* Center horizontally */
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+            margin-top: 2rem; /* Add some margin to move the form down a bit if needed */
+        }
+        .button {
+            @apply bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-transform transform hover:scale-105;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container mx-auto">
+        <div class="container p-6">
+            <div class="p-8 rounded-lg">
+                <h2 class="text-3xl font-bold mb-6">Exam Results</h2>
+
+                <!-- Display Score and Percentage -->
+                <p class="text-lg mb-4">Score: <span class="font-semibold">{{ exam_result.score }}</span> out of <span class="font-semibold">{{ exam_result.total_questions }}</span></p>
+                <p class="text-lg mb-6">Percentage: <span class="font-semibold">{{ exam_result.percentage_score|floatformat:2 }}%</span></p>
+
+                <!-- Display Questions and Options -->
+                {% for question in questions %}
+                <div class="p-4 rounded-lg shadow-md mb-4">
+                    <p class="text-lg font-semibold mb-2"><strong>Question:</strong> {{ question.text }}</p>
+                    <div class="space-y-2">
+                        {% if question.multiple_correct %}
+                            <!-- Multi-select (Checkboxes) -->
+                            {% for option in question.options %}
+                                {% if option.is_correct and option.is_selected %}
+                                <div class="p-2 rounded-lg text-green-500 flex items-center">
+                                    <input type="checkbox" checked disabled class="mr-2" />
+                                    <p class="text-sm">
+                                        {{ option.text }}
+                                        <span class="font-semibold">(Selected)</span>
+                                    </p>
+                                </div>
+                                {% elif not option.is_correct and option.is_selected %}
+                                <div class="p-2 rounded-lg text-red-500 flex items-center">
+                                    <input type="checkbox" checked disabled class="mr-2" />
+                                    <p class="text-sm">
+                                        {{ option.text }}
+                                        <span class="font-semibold">(Incorrect)</span>
+                                    </p>
+                                </div>
+                                {% else %}
+                                <div class="p-2 rounded-lg text-gray-500 flex items-center">
+                                    <input type="checkbox" disabled class="mr-2" />
+                                    <p class="text-sm">{{ option.text }}</p>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <!-- Single-select (Radio Buttons) -->
+                            {% for option in question.options %}
+                                {% if option.is_correct and option.is_selected %}
+                                <div class="p-2 rounded-lg text-green-500 flex items-center">
+                                    <input type="radio" checked disabled class="mr-2" />
+                                    <p class="text-sm">
+                                        {{ option.text }}
+                                        <span class="font-semibold">(Selected)</span>
+                                    </p>
+                                </div>
+                                {% elif not option.is_correct and option.is_selected %}
+                                <div class="p-2 rounded-lg text-red-500 flex items-center">
+                                    <input type="radio" checked disabled class="mr-2" />
+                                    <p class="text-sm">
+                                        {{ option.text }}
+                                        <span class="font-semibold">(Incorrect)</span>
+                                    </p>
+                                </div>
+                                {% else %}
+                                <div class="p-2 rounded-lg text-gray-500 flex items-center">
+                                    <input type="radio" disabled class="mr-2" />
+                                    <p class="text-sm">{{ option.text }}</p>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- Single Button for Retake and Reset -->
+                <div class="mt-6">
+                    <button id="retakeAndReset" class="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-600">Retake Exam</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('retakeAndReset').addEventListener('click', function() {
+            // Reset LocalStorage
+            localStorage.clear();
+
+            // Show SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Data has been reset. You will be redirected to retake the exam.',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the exam page
+                    window.location.href = "{% url 'take_exam' exam_result.id %}";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
