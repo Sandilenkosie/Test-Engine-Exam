@@ -38,15 +38,6 @@ def add_set5(apps, schema_editor):
             ]
         },
         {
-        'text': 'A sales rep has a list of 300 accounts with contacts that they want to load at one time. Which tool should the administrator utilize to import the records to Salesforce?',
-        'answers': [
-            ('Dataloader.io', False),
-            ('Data loader', False),
-            ('Manual import', False),
-            ('Data import wizard', True)
-            ]
-        },
-        {
         'text': 'An administrator created a record trigger flow to update contacts. How should the administrator reference the values of the active record the flow is running on?',
         'answers': [
             ('Use the {!contact.id} global variable.', False),
@@ -74,15 +65,6 @@ def add_set5(apps, schema_editor):
         ]
     },
     {
-        'text': 'Which two actions should an administrator perform with case escalation rules? (Choose 2 answers)',
-        'answers': [
-            ('Re-open the case.', False),
-            ('Send email notifications.', True),
-            ('Change the case priority.', False),
-            ('Re-assign the case.', True)
-        ]
-    },
-    {
         'text': 'The sales director at Cloud Kicks wants to be able to predict upcoming revenue in the next several fiscal quarters so they can set goals and benchmark how reps are performing. Which two features should the administrator configure? (Choose 2 answers)',
         'answers': [
             ('Sales quotes', True),
@@ -91,8 +73,6 @@ def add_set5(apps, schema_editor):
             ('Opportunity stages', False)
         ]
     },
-    # blue bro___
-    
     {
         'text': 'Universal Containers requires a different Lightning page to be displayed when accounts are viewed in the Sales Console and in the Service Console. How should an administrator meet this requirement?',
         'answers': [

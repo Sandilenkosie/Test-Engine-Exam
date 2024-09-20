@@ -6,7 +6,7 @@ def add_set3(apps, schema_editor):
     Answer = apps.get_model('exam', 'Answer')
 
     # Create an exam instance
-    exam = Exam.objects.create(title='ADM-201-Set1 Exam')
+    exam = Exam.objects.create(title='ADM-201-Set3 Exam')
 
     # Define questions and answers
     questions_data = [

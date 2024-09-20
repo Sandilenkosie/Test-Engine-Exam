@@ -551,8 +551,8 @@ def add_set2(apps, schema_editor):
         'answers': [
             ('Permission sets', False),
             ('Organization-wide defaults', False),
-            ('Marketing user checkbox', False),
-            ('Field-level security', True)
+            ('Marketing user checkbox', True),
+            ('Field-level security', False)
         ]
     },
     {
