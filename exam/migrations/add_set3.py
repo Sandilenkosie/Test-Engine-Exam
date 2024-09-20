@@ -66,30 +66,12 @@ def add_set3(apps, schema_editor):
     ]
 },
 {
-    'text': 'An administrator supporting a global team of Salesforce users has been asked to configure company settings. Choose 2 options.',
-    'answers': [
-        ('Currency locale', True),
-        ('Default language', True),
-        ('Password policy', False),
-        ('Login hours', False)
-    ]
-},
-{
     'text': 'Which item is available in a Lightning app where visibility is limited to the Salesforce mobile app?',
     'answers': [
         ('Today', False),
         ('Favorites', False),
         ('Utility bar', True),
         ('Home page', False)
-    ]
-},
-{
-    'text': 'Ursa Major Solar wants to know which of its marketing efforts are helping the team win opportunities. What should an administrator configure to provide these insights?',
-    'answers': [
-        ('Campaign hierarchy', False),
-        ('Campaign influence', True),
-        ('Map custom lead fields', False),
-        ('List email activities', False)
     ]
 },
 {
@@ -133,8 +115,8 @@ def add_set3(apps, schema_editor):
     'answers': [
         ('Hierarchical sharing', False),
         ('Use manual sharing', False),
-        ('Criteria-based sharing', False),
-        ('Owner-based sharing', True)
+        ('Criteria-based sharing', True),
+        ('Owner-based sharing', False)
     ]
 },
 {
@@ -265,15 +247,6 @@ def add_set3(apps, schema_editor):
     ]
 },
 {
-    'text': 'Which item is available in a Lightning App where visibility is limited to the Salesforce Mobile App?',
-    'answers': [
-        ('Today', False),
-        ('Favorites', False),
-        ('Utility Bar', True),
-        ('Home Page', False)
-    ]
-},
-{
     'text': 'Ursa Major Solar wants to know which of its marketing efforts are helping the team win Opportunities. What should an administrator configure to provide these insights?',
     'answers': [
         ('Campaign Hierarchy', False),
@@ -379,25 +352,6 @@ def add_set3(apps, schema_editor):
             ('Global Value Picklists', False),
             ('Predefined field Values.', False),
             ('Dependent Picklists.', False)
-        ]
-    },
-    {
-        'text': 'Sales reps miss key fields when filling out an opportunity record through the process. Reps need to move forward without entering previous stages. Which three options should the administrator use to address this need? Choose Three answers.',
-        'answers': [
-            ('Enable guided selling.', False),
-            ('Use Validation Rules.', True),
-            ('Configure Opportunity Path.', True),
-            ('Use Flow to mark fields required.', False),
-            ('Mark fields required on the page layout.', True)
-        ]
-    },
-    {
-        'text': 'Cloud Kicks (CK) has a new administrator who is asked to put together a memo detailing Salesforce uses to budget for upcoming license purchases. Where Should the administrator go to find out what type of licenses CK Has purchased and how many are available?',
-        'answers': [
-            ('Search for licenses types in setup.', False),
-            ('User Licenses Related List in Company information.', True),
-            ('User Management settings in setup.', False),
-            ('Usage based entitlement related list in company information.', False)
         ]
     },
     {
