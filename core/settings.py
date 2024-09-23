@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -134,3 +135,16 @@ LOGIN_URL = '/login/'  # URL for login page
 
 # Define session settings if needed
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP server
+EMAIL_PORT = 587  # Use port 587 for TLS
+EMAIL_USE_TLS = True  # Enable TLS
+EMAIL_HOST_USER = 'sandilenkosie06@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'Sandile23$'  # Your email password
+DEFAULT_FROM_EMAIL = 'gh0stexam@gmail.com'  # Default sender email
+
+# Email settings for local development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+

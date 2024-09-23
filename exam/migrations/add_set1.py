@@ -321,10 +321,10 @@ def add_set1(apps, schema_editor):
     {
         'text': 'Universal Containers (UC) customers have provided feedback that their support cases are not being responded to quickly enough. UC wants to send all unassigned Cases that have been open for more than two hours to an urgent Case queue and alert the support manager. Which feature should an administrator configure to meet this requirement?',
         'answers': [
-            ('Case Escalation Rules', False),
+            ('Case Escalation Rules', True),
             ('Case Dashboard Refreshes', False),
             ('Case Scheduled Report', False),
-            ('Case Assignment Rules', True)
+            ('Case Assignment Rules', False)
         ]
     },
     {
@@ -603,7 +603,13 @@ def add_set1(apps, schema_editor):
 ]
 
     for question_data in questions_data:
-        question = Question.objects.create(exam=exam, text=question_data['text'], multiple_correct=any(answer[1] for answer in question_data['answers']))
+        # Automatically set multiple_correct if more than one answer is correct
+        multiple_correct = sum(1 for answer in question_data['answers'] if answer[1]) > 1
+        question = Question.objects.create(
+            exam=exam, 
+            text=question_data['text'], 
+            multiple_correct=multiple_correct
+        )
         for answer_text, is_correct in question_data['answers']:
             Answer.objects.create(question=question, text=answer_text, is_correct=is_correct)
 

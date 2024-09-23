@@ -356,7 +356,13 @@ def add_set5(apps, schema_editor):
     ]
 
     for question_data in questions_data:
-        question = Question.objects.create(exam=exam, text=question_data['text'], multiple_correct=any(answer[1] for answer in question_data['answers']))
+        # Automatically set multiple_correct if more than one answer is correct
+        multiple_correct = sum(1 for answer in question_data['answers'] if answer[1]) > 1
+        question = Question.objects.create(
+            exam=exam, 
+            text=question_data['text'], 
+            multiple_correct=multiple_correct
+        )
         for answer_text, is_correct in question_data['answers']:
             Answer.objects.create(question=question, text=answer_text, is_correct=is_correct)
 

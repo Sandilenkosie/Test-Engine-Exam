@@ -32,7 +32,7 @@ class Answer(models.Model):
     
     @staticmethod
     def get_shuffled_answers(question):
-        answers = list(Answer.objects.filter(question=question))
+        answers = list(Answer.objects.filter(question=question))   
         random.shuffle(answers)
         return answers
 

@@ -7,6 +7,7 @@ class AnswerInline(admin.TabularInline):
 
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
+    list_filter = ('exam__title',)
 
 admin.site.register(Exam)
 admin.site.register(Question, QuestionAdmin)

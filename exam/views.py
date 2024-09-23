@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import timezone
+from django.core.mail import send_mail
+from django.conf import settings
 from .models import Exam, Answer, Question, ExamResult, ExamResultOption
 
 
@@ -184,18 +188,20 @@ def exam_result(request, exam_result_id):
 @login_required
 def box(request):
     user = request.user
-    # Get all exams the user has taken along with their result IDs
     taken_exams = Exam.objects.filter(examresult__user=user).distinct()
     
-    # Create a list of dictionaries with exam details and the latest result
     exam_results = []
+    passing_score = 65  # Define the passing score
+
     for exam in taken_exams:
         latest_result = exam.examresult_set.filter(user=user).order_by('-created_at').first()
         if latest_result:
+            status = 'passed' if latest_result.percentage_score >= passing_score else 'failed'  # Use lowercase for consistency
             exam_results.append({
                 'exam': exam,
                 'exam_result_id': latest_result.id,
-                'taken_date': latest_result.created_at
+                'taken_date': latest_result.created_at,
+                'status': status  # Store the status in lowercase
             })
     
     context = {'exam_results': exam_results}
@@ -232,15 +238,44 @@ def login_view(request):
             # Redirect to the admin dashboard if the user is an admin
             if user.is_superuser:
                 return redirect('admin:index')
+            
             request.session['show_success_alert'] = True
-            return redirect('index') 
+            return redirect('index')
+        else:
+            messages.error(request, 'Invalid username or password. Please try again.')
     else:
         form = AuthenticationForm()
+
     return render(request, 'registration/login.html', {'form': form})
 
 def LogoutView(request):
     logout(request)
     return redirect('login') 
+
+
+
+def forgot_password_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+            # Here you can generate a password reset token or link
+            reset_link = f"{request.build_absolute_uri('/reset-password/')}?token=some_unique_token"  # Placeholder for actual token logic
+            
+            # Send the reset email
+            send_mail(
+                'Password Reset Request',
+                f'Click the link to reset your password: {reset_link}',
+                settings.DEFAULT_FROM_EMAIL,
+                [user.email],
+                fail_silently=False,
+            )
+            messages.success(request, 'Password reset link has been sent to your email.')
+            return redirect('login')  # Redirect to login after sending email
+        except User.DoesNotExist:
+            messages.error(request, 'No user found with that email address.')
+    
+    return render(request, 'registration/forgot_password.html')
 
 
 
