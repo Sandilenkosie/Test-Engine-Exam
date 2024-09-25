@@ -475,8 +475,8 @@ def add_set3(apps, schema_editor):
         'text': 'Cloud Kicks has asked the administrator to test a new screen flow that creates contacts. What are two key components of testing the flow? Choose 2 answers.',
         'answers': [
             ('Set Up a flow interview to test the flow.', False),
-            ('Run the flow using it to create contacts.', True),
-            ('Use Debug to test the flow in Flow Builder.', False),
+            ('Run the flow using it to create contacts.', False),
+            ('Use Debug to test the flow in Flow Builder.', True),
             ('Test the flow in a sandbox.', True)
         ]
     },
