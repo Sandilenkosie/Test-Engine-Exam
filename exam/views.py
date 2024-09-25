@@ -34,7 +34,7 @@ def take_exam(request, exam_id):
     # Shuffle and fetch questions
     questions = Question.get_shuffled_questions(exam)
 
-    # Fetch answers for questions
+    # Shuffle and fetch answers for each question
     for question in questions:
         question.answers = Answer.get_shuffled_answers(question)
 
@@ -46,11 +46,9 @@ def take_exam(request, exam_id):
 
         for question in questions:
             if question.multiple_correct:
-                # Retrieve selected and correct answer IDs
                 selected_answer_ids = [int(id) for id in request.POST.getlist(f'answers_{question.id}')]
                 correct_answer_ids = [int(id) for id in question.answer_set.filter(is_correct=True).values_list('id', flat=True)]
 
-                # Check correctness
                 is_correct = set(selected_answer_ids) == set(correct_answer_ids)
                 if is_correct:
                     score += 1
@@ -70,7 +68,6 @@ def take_exam(request, exam_id):
                     })
 
             else:
-                # Handle single-select answers
                 selected_answer_id = request.POST.get(f'answer_{question.id}')
                 if selected_answer_id:
                     try:
@@ -106,7 +103,6 @@ def take_exam(request, exam_id):
 
         percentage_score = (score / total_questions) * 100 if total_questions > 0 else 0
 
-        # Save result to the database
         exam_result = ExamResult.objects.create(
             user=request.user,
             exam=exam,
@@ -117,7 +113,6 @@ def take_exam(request, exam_id):
             wrong_answers=wrong_answers
         )
 
-        # Save selected options in ExamResultOption
         for question in questions:
             if question.multiple_correct:
                 selected_answer_ids = request.POST.getlist(f'answers_{question.id}')
@@ -135,15 +130,16 @@ def take_exam(request, exam_id):
                         answer_id=selected_answer_id,
                         is_selected=True
                     )
-                    
+
         return redirect('exam_result', exam_result_id=exam_result.id)
 
     context = {
         'exam': exam,
         'questions': questions,
     }
-    
+
     return render(request, 'exam/take_exam.html', context)
+
 
 
 @login_required
