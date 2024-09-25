@@ -1,9 +1,35 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.html import mark_safe
 import random
+from django.core.files.base import ContentFile
+from PIL import Image as PilImage
+from io import BytesIO
+import os
 
 class Exam(models.Model):
     title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='exam_images/', null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='exam_thumbnails/', null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            # Generate thumbnail
+            image = PilImage.open(self.image)
+            image.thumbnail((100, 100))  # Thumbnail size
+            thumb_io = BytesIO()
+            image.save(thumb_io, format='JPEG')
+            thumb_file = ContentFile(thumb_io.getvalue(), name=os.path.basename(self.image.name))
+            self.thumbnail.save(f'thumbnail_{self.image.name}', thumb_file, save=False)
+        
+        super().save(*args, **kwargs)
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<img src="{self.image.url}" style="width: 50px; height: auto;" />')
+        return "No Image Available"
+    
+    image_tag.short_description = 'Image Preview'
 
     def __str__(self):
         return self.title

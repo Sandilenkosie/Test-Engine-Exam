@@ -9,7 +9,12 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
     list_filter = ('exam__title',)
 
-admin.site.register(Exam)
+class ExamAdmin(admin.ModelAdmin):
+    list_display = ('image_tag','title',)  # Display fields in list view
+    search_fields = ('title',)
+
+
+admin.site.register(Exam, ExamAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(ExamResult)
