@@ -298,8 +298,17 @@ def add_set6(apps, schema_editor):
             ('Add the knowledge related list to the record page.', False),
             ('Add the knowledge component to the page layout.', True),
     ]
-    }
+    },
+    {
+        'text': 'Support reps at Cloud Kicks (CK) are reporting that when they try to close a case, the Closed option in the Case Status picklist is missing. CK has asked the administrator to find a solution. Why are the support reps unable to see the Closed option in the specified picklist?',
+        'answers': [
+            ('The Support Process being used omits Closed as a status choice.', False),
+            ('The Show Closed Statuses in Case Status Field checkbox is set to the default.', False),
+            ('The Case record type is missing Closed as a picklist value.', True),
+            ('The Close Case page layout must be used to close a case.', False),
     ]
+    },
+]
 
 
     for question_data in questions_data:
