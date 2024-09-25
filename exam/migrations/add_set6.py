@@ -105,8 +105,8 @@ def add_set6(apps, schema_editor):
             'answers': [
                 ('Task Assignment', False),
                 ('Case Auto-Response Rule', False),
-                ('Recorded-triggered flow', True),
-                ('Process Builder', False),
+                ('Recorded-triggered flow', False),
+                ('Process Builder', True),
             ]
         },
         {
@@ -168,16 +168,16 @@ def add_set6(apps, schema_editor):
         'text': 'Northern Trail Outfitters uses a custom object Invoice to collect customer payment information from an external billing system. The Billing System field needs to be filled in on every Invoice record. How should an administrator ensure this requirement?',
         'answers': [
             ('Define an approval process for the field.', False),
-            ('Make the field universally required.', False),
-            ('Create a Process Builder to set the field.', True),
+            ('Make the field universally required.', True),
+            ('Create a Process Builder to set the field.', False),
             ('Require the field on the record type.', False),
         ]
     },
     {
         'text': 'Once an opportunity reaches the negotiation stage at Cloud Kicks, the Amount field becomes required for sales users. Sales managers need to be able to move opportunities into this stage without knowing the amount. How should the administrator require this field during the negotiation stage for sales users but allow their managers to make changes?',
         'answers': [
-            ('Make the field required for all users.', True),
-            ('Configure a validation rule to meet the criteria.', False),
+            ('Make the field required for all users.', False),
+            ('Configure a validation rule to meet the criteria.', True),
             ('Create a formula field to fill in the field for managers.', False),
             ('Assign the Administrator profile to the managers.', False),
         ]

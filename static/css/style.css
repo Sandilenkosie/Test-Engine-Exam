@@ -392,3 +392,32 @@
     padding: 0.5rem;
     border-radius: 0.5rem;
 }
+
+.m-result {
+  background-image: url('/static/img/pexels-tima-miroshnichenko-5380650.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Ensure the background image remains fixed */
+  background-repeat: no-repeat; /* Prevent repeating the background image */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
+  height: 100vh; /* Ensure the body takes up the full height of the viewport */
+  display: flex;
+  align-items: flex-start; /* Align items to the start (top) */
+  justify-content: center; /* Center horizontally */
+}
+.form-container-1 {
+  background: rgba(95, 93, 93, 0.9); /* Semi-transparent white background */
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  margin-top: 2rem; /* Add some margin to move the form down a bit if needed */
+}
+.button {
+  @apply bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-transform transform hover:scale-105;
+}
