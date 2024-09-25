@@ -231,8 +231,8 @@ def add_set6(apps, schema_editor):
         'text': 'The CTO of AW Computing has defined a new policy for cases to improve customer satisfaction. All cases submitted with a Case Reason of Installation must be acknowledged immediately via email and assigned to the appropriate agents. Any cases that are still in the New status after 4 hours must be escalated to support management. What case management tools need to be utilized for this requirement?',
         'answers': [
             ('Auto-response rules, Support Processes, Entitlements', False),
-            ('Auto-response rules, Entitlements, Queues', True),
-            ('Auto-response rules, Support Processes, Escalation Rules', False),
+            ('Auto-response rules, Entitlements, Queues', False),
+            ('Auto-response rules, Support Processes, Escalation Rules', True),
             ('Auto-response rules, Queues, formulas', False),
         ]
     },

@@ -329,3 +329,66 @@
   border-color: #405867;
   color: #fff;
 }
+
+.m-body {
+    background-image: url('/static/img/pexels-tima-miroshnichenko-5380650.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+}
+.form-container {
+    background: rgba(95, 93, 93, 0.9); /* Semi-transparent white background */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    width: 100%;
+    max-width: 800px;
+}
+.step-content {
+    display: none;
+}
+.step-content.active {
+    display: block;
+}
+.question h3 {
+    font-family: 'Georgia', serif;
+    color: white;
+}
+.question p {
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+.step-navigation ul {
+    list-style: none;
+    padding: 0;
+}
+.step-navigation li {
+    display: flex;
+    align-items: center;
+}
+.step-navigation svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+}
+.step-navigation .cursor-pointer {
+    cursor: pointer;
+}
+.step-navigation .text-sm {
+    font-size: 0.875rem;
+}
+.timer {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    margin: 1rem;
+    position: fixed; /* Position the timer fixed to the viewport */
+    top: 8px; /* Distance from the top */
+    left: 1rem; /* Distance from the left */
+    z-index: 1000; /* Ensure it's on top of other content */
+    background-color: rgba(95, 93, 93, 0.9); /* Slightly opaque background */
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}

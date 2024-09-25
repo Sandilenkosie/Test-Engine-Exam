@@ -1,42 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Result</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
-    <style>
-        body {
-            background-image: url('/static/media/exams/pexels-pixabay-161901.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Ensure the background image remains fixed */
-            background-repeat: no-repeat; /* Prevent repeating the background image */
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh; /* Ensure the body takes up the full height of the viewport */
-            display: flex;
-            align-items: flex-start; /* Align items to the start (top) */
-            justify-content: center; /* Center horizontally */
-        }
-        .form-container {
-            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-            box-sizing: border-box; /* Include padding and border in element's total width and height */
-            margin-top: 2rem; /* Add some margin to move the form down a bit if needed */
-        }
-        .button {
-            @apply bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-transform transform hover:scale-105;
-        }
-    </style>
-</head>
-<body>
+{% extends 'partial/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="m-body">
     <div class="form-container mx-auto">
         <div class="container p-6">
             <div class="p-8 rounded-lg">
@@ -49,7 +16,7 @@
                 <!-- Display Questions and Options -->
                 {% for question in questions %}
                 <div class="p-4 rounded-lg shadow-md mb-4">
-                    <p class="text-lg font-semibold mb-2"><strong>Question:</strong> {{ question.text }}</p>
+                    <p class="text-lg text-white font-semibold mb-2"><strong>Question:</strong> {{ question.text }}</p>
                     <div class="space-y-2">
                         {% if question.multiple_correct %}
                             <!-- Multi-select (Checkboxes) -->
@@ -71,7 +38,7 @@
                                     </p>
                                 </div>
                                 {% else %}
-                                <div class="p-2 rounded-lg text-gray-500 flex items-center">
+                                <div class="p-2 rounded-lg text-white flex items-center">
                                     <input type="checkbox" disabled class="mr-2" />
                                     <p class="text-sm">{{ option.text }}</p>
                                 </div>
@@ -97,7 +64,7 @@
                                     </p>
                                 </div>
                                 {% else %}
-                                <div class="p-2 rounded-lg text-gray-500 flex items-center">
+                                <div class="p-2 rounded-lg text-white flex items-center">
                                     <input type="radio" disabled class="mr-2" />
                                     <p class="text-sm">{{ option.text }}</p>
                                 </div>
@@ -135,5 +102,5 @@
             });
         });
     </script>
-</body>
-</html>
+</div>
+{% endblock %}

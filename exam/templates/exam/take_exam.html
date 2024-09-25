@@ -1,76 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Step Exam Form</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        body {
-            background-image: url('/static/media/exams/pexels-pixabay-161901.jpg');
-            background-size: cover;
-            background-position: center;
-            font-family: 'Arial', sans-serif;
-        }
-        .form-container {
-            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-        }
-        .step-content {
-            display: none;
-        }
-        .step-content.active {
-            display: block;
-        }
-        .question h3 {
-            font-family: 'Georgia', serif;
-            color: #333;
-        }
-        .question p {
-            font-family: 'Arial', sans-serif;
-            color: #555;
-        }
-        .step-navigation ul {
-            list-style: none;
-            padding: 0;
-        }
-        .step-navigation li {
-            display: flex;
-            align-items: center;
-        }
-        .step-navigation svg {
-            width: 1.25rem;
-            height: 1.25rem;
-            margin-right: 0.5rem;
-        }
-        .step-navigation .cursor-pointer {
-            cursor: pointer;
-        }
-        .step-navigation .text-sm {
-            font-size: 0.875rem;
-        }
-        .timer {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: red;
-            text-align: center;
-            margin: 1rem;
-            position: fixed; /* Position the timer fixed to the viewport */
-            top: 1rem; /* Distance from the top */
-            left: 1rem; /* Distance from the left */
-            z-index: 1000; /* Ensure it's on top of other content */
-            background-color: rgba(255, 255, 255, 0.8); /* Slightly opaque background */
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-        }
-    </style>
-</head>
-<body class="min-h-screen flex items-center justify-center">
+{% extends 'partial/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="m-body min-h-screen flex items-center justify-center">
 
 <div class="form-container">
     <h2 class="text-3xl font-bold mb-6 text-center">{{ exam.title }}</h2>
@@ -86,7 +19,7 @@
         {% for question in questions %}
         <div class="step-content {% if forloop.first %}active{% endif %}">
             <div class="question">
-                <h3 class="text-lg font-semibold mb-4" aria-live="polite">Question {{ forloop.counter }}: {{ question.text|lower|capfirst }}</h3>
+                <h3 class="text-lg mb-4" aria-live="polite">Question {{ forloop.counter }}: {{ question.text|lower|capfirst }}</h3>
                 <hr class="border-b-2 my-4" />
                 <div class="space-y-2">
                     {% for answer in question.answers %}
@@ -99,7 +32,7 @@
                                         <path d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z" />
                                     </svg>
                                 </label>
-                                <p class="text-sm text-black ml-4">{{ answer.text|lower|capfirst }}</p>
+                                <p class="text-sm text-white ml-4">{{ answer.text|lower|capfirst }}</p>
                             </div>
                         {% else %}
                             <div class="flex items-center">
@@ -107,7 +40,7 @@
                                 <label id="label_{{ question.id }}_{{ answer.id }}" for="radio_{{ question.id }}_{{ answer.id }}" class="relative flex items-center justify-center peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-6 h-6 cursor-pointer border-2 border-orange-500 rounded-full overflow-hidden">
                                     <span class="border-[6px] border-orange-500 rounded-full w-full h-full"></span>
                                 </label>
-                                <span class="ml-3 text-gray-700">{{ answer.text|lower|capfirst }}</span>
+                                <span class="ml-3 text-white">{{ answer.text|lower|capfirst }}</span>
                             </div>
                         {% endif %}
                     {% endfor %}
@@ -292,5 +225,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-</body>
-</html>
+</div>
+{% endblock %}
