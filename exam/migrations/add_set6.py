@@ -187,8 +187,8 @@ def add_set6(apps, schema_editor):
         'answers': [
             ('Configure formula fields on Event to populate contact information.', False),
             ('Use a dashboard with filters to show Event and contact data as requested.', False),
-            ('Edit the custom Event report type and add fields related via lookup.', False),
-            ('Create a new report type with Event as the primary object and Contact as a related object.', True),
+            ('Edit the custom Event report type and add fields related via lookup.', True),
+            ('Create a new report type with Event as the primary object and Contact as a related object.', False),
         ]
     },
     {
@@ -271,6 +271,33 @@ def add_set6(apps, schema_editor):
             ('The Restricted picklist checkbox was unchecked.', False),
             ('Field-level security was set to Visible for all profiles.', False),
         ]
+    },
+    {
+        'text': 'An administrator at AW Computing has been asked to help the Support team with report folders. They want a folder called Support Reports and two folders underneath called Helpdesk and R&D. The Support organization uses public groups for Support Agents, R&D, and Managers. Support agents should be able to run Helpdesk reports, but should not be able to view R&D reports. Support managers should be able to view and edit all reports. Which two ways should these folders be shared? Choose 2 answers',
+        'answers': [
+            ('Share the Support Reports folder with Support Agents with View Access.', False),
+            ('Share the Support Reports folder with Support Managers with Edit Access.', True),
+            ('Share the R&D folder with Support Managers with Edit Access.', False),
+            ('Share the Helpdesk folder with Support Agents with View Access.', True),
+    ]
+    },
+    {
+        'text': 'Ursa Major Solar uses Opportunity to track sales of solar energy products. The company has two separate sales teams that focus on different energy markets. The Services team also wants to use Opportunity to track installation. All three teams will need to use different fields and stages. How should the administrator configure this requirement?',
+        'answers': [
+            ('Create one sales process. Create one record type and three page layouts.', False),
+            ('Create three sales processes. Create three record types and three page layouts.', True),
+            ('Create three sales processes. Create three record types and one page layout.', False),
+            ('Create one sales process. Create three record types and three page layouts.', False),
+    ]
+    },
+    {
+        'text': 'Customer service accesses articles with the Knowledge Lightning component on the Service Cloud Console. Billing department users would like similar functionality on the case record without using the console. How should the administrator configure this request?',
+        'answers': [
+            ('Add the Knowledge related list to the page layout.', False),
+            ('Add the Knowledge component list to the page layout.', False),
+            ('Add the knowledge related list to the record page.', False),
+            ('Add the knowledge component to the page layout.', True),
+    ]
     }
     ]
 
