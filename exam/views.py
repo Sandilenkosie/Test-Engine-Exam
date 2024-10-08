@@ -15,7 +15,7 @@ def index(request):
     user = request.user
     taken_exams = ExamResult.objects.filter(user=user).values_list('exam', flat=True)
     # Get all exams except the ones the user has already taken
-    exams = Exam.objects.exclude(id__in=taken_exams)
+    exams = Exam.objects.all()
     
     show_success_alert = request.session.pop('show_success_alert', False)
 

@@ -26,13 +26,16 @@ class Exam(models.Model):
 
     def image_tag(self):
         if self.image:
+            # If an image exists, display it
             return mark_safe(f'<img src="{self.image.url}" style="width: 50px; height: auto;" />')
-        return "No Image Available"
+        else:
+            # Display a default placeholder image or text
+            return mark_safe('<img src="https://readymadeui.com/cardImg.webp" alt="Default Image" />')
     
     image_tag.short_description = 'Image Preview'
 
     def __str__(self):
-        return self.title
+        return self.titlee
 
 class Question(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
