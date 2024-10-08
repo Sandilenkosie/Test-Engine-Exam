@@ -6,41 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Result</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             background-image: url('/static/img/pexels-tima-miroshnichenko-5380650.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            /* Ensure the background image remains fixed */
             background-repeat: no-repeat;
-            /* Prevent repeating the background image */
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             color: white;
             height: 100vh;
-            /* Ensure the body takes up the full height of the viewport */
             display: flex;
             align-items: flex-start;
-            /* Align items to the start (top) */
             justify-content: center;
-            /* Center horizontally */
         }
 
         .form-container {
             background: rgba(95, 93, 93, 0.9);
-            /* Semi-transparent white background */
             padding: 2rem;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 800px;
-            box-sizing: border-box;
-            /* Include padding and border in element's total width and height */
             margin-top: 2rem;
-            /* Add some margin to move the form down a bit if needed */
+        }
+
+        .question h3 {
+            font-family: 'Georgia', serif;
+            color: white;
+        }
+
+        .question p {
+            font-family: 'Arial', sans-serif;
+            color: white;
         }
 
         .button {
@@ -53,72 +54,67 @@
     <div class="form-container mx-auto">
         <div class="container p-6">
             <div class="p-8 rounded-lg">
+
                 <h2 class="text-3xl font-bold mb-6">Exam Results</h2>
 
                 <!-- Display Score and Percentage -->
-                <p class="text-lg mb-4">Score: <span class="font-semibold">{{ exam_result.score }}</span> out of <span
-                        class="font-semibold">{{ exam_result.total_questions }}</span></p>
-                <p class="text-lg mb-6">Percentage: <span class="font-semibold">{{exam_result.percentage_score|floatformat:2 }}%</span></p>
+                <h3 class="text-lg mb-4">Score: <span class="font-semibold">{{ exam_result.score }}</span> out of <span
+                        class="font-semibold">{{ exam_result.total_questions }}</span></h3>
+                <h3 class="text-lg mb-6">Percentage: <span
+                        class="font-semibold">{{ exam_result.percentage_score|floatformat:2 }}%</span></h3>
+                
+                <!-- Navigation Buttons -->
+                <div class="step-navigation flex items-center justify-center mt-4 space-x-4">
+                    <ul class="flex items-center justify-center space-x-4 font-[sans-serif] mt-4">
+                        <li class="text-gray-500 bg-gray-100 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center"
+                            id="retakeAndReset">
+                            Retake Exam
+                        </li>
+                        <li class="text-gray-500 text-3xl">/</li>
+                        <a href="{% url 'index' %}">
+                            <li class="text-white bg-gray-700 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center">
+                                Home
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <hr class="border-b-0 my-4" />
 
                 <!-- Display Questions and Options -->
                 {% for question in questions %}
                 <div class="p-4 rounded-lg shadow-md mb-4">
+                    <div class="question">
                     <p class="text-lg text-white font-semibold mb-2"><strong>Question:</strong> {{ question.text }}</p>
+                    <hr class="border-b-2 my-4" />
                     <div class="space-y-2">
-                        {% if question.multiple_correct %}
-                        <!-- Multi-select (Checkboxes) -->
                         {% for option in question.options %}
-                        {% if option.is_correct and option.is_selected %}
-                        <div class="p-2 rounded-lg text-green-500 flex items-center">
-                            <input type="checkbox" checked disabled class="mr-2" />
-                            <p class="text-sm">
-                                {{ option.text }}
-                                <span class="font-semibold">(Selected)</span>
-                            </p>
+                        <div class="flex items-center">
+  
+                            {% if option.is_correct and option.is_selected %}
+                                <input type="radio"
+                                    class="w-4 h-4 appearance-none border-2 border-green-500 rounded-full checked:bg-green-500 checked:border-green-500 checked:focus:outline-none"
+                                    checked disabled />
+                                <label class="text-sm text-green-500 ml-4">{{ option.text|lower|capfirst }}</label>
+                            {% elif not option.is_correct and option.is_selected %}
+                                <input type="radio"
+                                    class="w-4 h-4 appearance-none border-2 border-red-500 rounded-full checked:bg-red-500 checked:border-red-500 checked:focus:outline-none"
+                                    checked disabled />
+                                <label class="text-sm text-red-500 ml-4">{{ option.text|lower|capfirst }}</label>
+                            {% elif option.is_correct and not option.is_selected%}
+                                <input type="radio"
+                                    class="w-4 h-4 appearance-none border-2 border-gray-500 rounded-full checked:bg-gray-500 checked:focus:outline-none"
+                                    disabled />
+                                <label class="text-sm text-green-500 ml-4">{{ option.text|lower|capfirst }}</label>
+                            {% else %}
+                                <input type="radio"
+                                    class="w-4 h-4 appearance-none border-2 border-gray-500 rounded-full checked:bg-gray-500 checked:focus:outline-none"
+                                    disabled />
+                                <label class="text-sm text-white ml-4">{{ option.text|lower|capfirst }}</label>
+                            {% endif %}
                         </div>
-                        {% elif not option.is_correct and option.is_selected %}
-                        <div class="p-2 rounded-lg text-red-500 flex items-center">
-                            <input type="checkbox" checked disabled class="mr-2" />
-                            <p class="text-sm">
-                                {{ option.text }}
-                                <span class="font-semibold">(Incorrect)</span>
-                            </p>
-                        </div>
-                        {% else %}
-                        <div class="p-2 rounded-lg text-white flex items-center">
-                            <input type="checkbox" disabled class="mr-2" />
-                            <p class="text-sm">{{ option.text }}</p>
-                        </div>
-                        {% endif %}
                         {% endfor %}
-                        {% else %}
-                        <!-- Single-select (Radio Buttons) -->
-                        {% for option in question.options %}
-                        {% if option.is_correct and option.is_selected %}
-                        <div class="p-2 rounded-lg text-green-500 flex items-center">
-                            <input type="radio" checked disabled class="mr-2" />
-                            <p class="text-sm">
-                                {{ option.text }}
-                                <span class="font-semibold">(Selected)</span>
-                            </p>
-                        </div>
-                        {% elif not option.is_correct and option.is_selected %}
-                        <div class="p-2 rounded-lg text-red-500 flex items-center">
-                            <input type="radio" checked disabled class="mr-2" />
-                            <p class="text-sm">
-                                {{ option.text }}
-                                <span class="font-semibold">(Incorrect)</span>
-                            </p>
-                        </div>
-                        {% else %}
-                        <div class="p-2 rounded-lg text-white flex items-center">
-                            <input type="radio" disabled class="mr-2" />
-                            <p class="text-sm">{{ option.text }}</p>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-                        {% endif %}
                     </div>
+                </div>
                 </div>
                 {% endfor %}
 
@@ -130,13 +126,11 @@
                             Retake Exam
                         </li>
                         <li class="text-gray-500 text-3xl">/</li>
-                        <a href="{%url 'index'%}">
-                            <li class="text-white bg-gray-700 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center"
-                               >
+                        <a href="{% url 'index' %}">
+                            <li class="text-white bg-gray-700 px-4 py-2 rounded-full text-sm tracking-wide font-bold cursor-pointer flex items-center">
                                 Home
                             </li>
                         </a>
-
                     </ul>
                 </div>
 
@@ -146,10 +140,7 @@
 
     <script>
         document.getElementById('retakeAndReset').addEventListener('click', function () {
-            // Reset LocalStorage
             localStorage.clear();
-
-            // Show SweetAlert
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
@@ -157,7 +148,6 @@
                 confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Redirect to the exam page
                     window.location.href = "{% url 'take_exam' exam_result.id %}";
                 }
             });

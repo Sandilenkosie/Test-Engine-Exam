@@ -144,9 +144,10 @@ def take_exam(request, exam_id):
 
 @login_required
 def exam_result(request, exam_result_id):
-    exam_result = ExamResult.objects.get(id=exam_result_id)
-    if not exam_result:
-        return redirect('take_exam', exam_result.exam_result_id)  # Redirect if no result is found
+    try:
+        exam_result = ExamResult.objects.get(id=exam_result_id)
+    except ExamResult.DoesNotExist:
+        return redirect('take_exam')  # Redirect if no result is found
 
     # Prepare a list of questions with their associated options
     questions = []
@@ -156,11 +157,7 @@ def exam_result(request, exam_result_id):
 
         options_with_selection = []
         for option in options:
-            is_selected = ExamResultOption.objects.filter(
-                exam_result=exam_result, 
-                answer=option,
-                is_selected=True
-            ).exists()
+            is_selected = exam_result_options.filter(answer=option).exists()
 
             options_with_selection.append({
                 'text': option.text,
