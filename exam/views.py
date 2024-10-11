@@ -4,26 +4,35 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Exam, Answer, Question, ExamResult, ExamResultOption
+from .models import Exam, Answer, Question, ExamResult, ExamResultOption,Group
 
 
-@login_required
 def index(request):
-    user = request.user
-    taken_exams = ExamResult.objects.filter(user=user).values_list('exam', flat=True)
-    # Get all exams except the ones the user has already taken
-    exams = Exam.objects.all()
-    
-    show_success_alert = request.session.pop('show_success_alert', False)
+    group_exams = Group.objects.prefetch_related('exams').all() 
 
     context = {
-        'exams': exams,
-        'show_success_alert': show_success_alert
+        'group_exams': group_exams,
     }
     return render(request, "index.html", context)
+
+@login_required
+def group_exam(request, id):
+    user = request.user
+    taken_exams = ExamResult.objects.filter(user=user).values_list('exam', flat=True)
+
+    # Get the group based on the provided id
+    group = get_object_or_404(Group, id=id)
+
+    # Get all exams in the group except the ones the user has already taken
+    exams = group.exams.exclude(id__in=taken_exams).order_by('-id')
+
+    context = {
+        'group': group,
+        'exams': exams,
+    }
+    return render(request, "exam/group_exam.html", context)
 
 
 @login_required

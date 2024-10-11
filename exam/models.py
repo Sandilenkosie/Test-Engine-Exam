@@ -2,38 +2,29 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.html import mark_safe
 import random
-from django.core.files.base import ContentFile
-from PIL import Image as PilImage
-from io import BytesIO
-import os
 
-class Exam(models.Model):
-    title = models.CharField(max_length=255)
+class Group(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
     image = models.ImageField(upload_to='exam_images/', null=True, blank=True)
-    thumbnail = models.ImageField(upload_to='exam_thumbnails/', null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        if self.image:
-            # Generate thumbnail
-            image = PilImage.open(self.image)
-            image.thumbnail((100, 100))  # Thumbnail size
-            thumb_io = BytesIO()
-            image.save(thumb_io, format='JPEG')
-            thumb_file = ContentFile(thumb_io.getvalue(), name=os.path.basename(self.image.name))
-            self.thumbnail.save(f'thumbnail_{self.image.name}', thumb_file, save=False)
-        
-        super().save(*args, **kwargs)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def image_tag(self):
         if self.image:
-            # If an image exists, display it
             return mark_safe(f'<img src="{self.image.url}" style="width: 50px; height: auto;" />')
-        else:
-            # Display a default placeholder image or text
-            return mark_safe('<img src="https://readymadeui.com/cardImg.webp" />')
-    
+        return "No Image"
+
     image_tag.short_description = 'Image Preview'
 
+    def __str__(self):
+        return self.name
+
+
+class Exam(models.Model):
+    title = models.CharField(max_length=255)
+    group = models.ManyToManyField(Group, related_name='exams', blank=True)
+    
     def __str__(self):
         return self.title
 

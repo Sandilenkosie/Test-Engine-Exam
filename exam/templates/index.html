@@ -20,15 +20,15 @@
         <h2 class="text-3xl font-extrabold text-[#333] inline-block relative after:absolute after:w-4/6 after:h-1 after:left-0 after:right-0 after:-bottom-4 after:mx-auto after:bg-pink-400 after:rounded-full">LATEST Exams</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 max-md:max-w-lg mx-auto">
-        {% for exam in exams %}
-        <a href="{% url 'take_exam' exam.id %}">
+        {% for exam in group_exams %}
+        <a href="{% url 'group_exam' exam.id %}">
         <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
           <img src="{{exam.image.url}}" alt="Blog Post 1" class="w-full h-60 object-cover" />
           <div class="p-6">
-            <span class="text-sm block text-gray-400 mb-2">10 FEB 2023 | BY JOHN DOE</span>
-            <h3 class="text-xl font-bold text-[#333]">{{exam.title}}</h3>
+            <span class="text-sm block text-gray-400 mb-2">{{exam.created_at|date:"F j, Y"}} | {{exam.updated_at|date:"F j, Y"}}</span>
+            <h3 class="text-xl font-bold text-[#333]">{{exam.name}}</h3>
             <hr class="my-6" />
-            <p class="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
+            <p class="text-gray-400 text-sm">{{ exam.description|truncatechars:50}}</p>
           </div>
         </div>
         </a>
