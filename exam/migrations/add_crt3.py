@@ -56,30 +56,12 @@ def add_crt3(apps, schema_editor):
             ]
         },
         {
-            'text': 'Universal Containers uses a custom picklist field Account Region on the account record. They want this region to be reflected on all related contact records and stay in sync if the value of this field changes on the Account. How should an app builder meet this requirement?',
-            'answers': [
-                ('Create a picklist field called "Account Region" on Contact object > Create a workflow rule to update this picklist field if the Account Region field on the Account is changed.', False),
-                ('Create a formula field on the Contact object > Set the value of the formula to ISPICKVAL(Account.Account_Region__c).', False),
-                ('Create a formula field on the Contact object > Set the value of the formula to TEXT(Account.Account_Region__c).', True),
-                ('Create a text field called "Account Region" on Contact object > Create a workflow rule to update this picklist field if the Account Region field on the Account is changed.', False)
-            ]
-        },
-        {
             'text': 'Which two features can be used to allow users to access Flows?',
             'answers': [
                 ('Quick Action', True),
                 ('Approval Process', False),
                 ('Flow Launcher', True),
                 ('Apex', False)
-            ]
-        },
-        {
-            'text': 'The CFO of Cloud Kicks needs a way for new vendors to accept terms on agreements for any new major retail store lease before the opportunity can be closed. Which feature should be used to handle this requirement?',
-            'answers': [
-                ('Email Alert', False),
-                ('Dynamic Action', False),
-                ('Approval Process', True),
-                ('Validation Rule', False)
             ]
         },
         {
@@ -92,48 +74,12 @@ def add_crt3(apps, schema_editor):
             ]
         },
         {
-            'text': 'The VP of Sales at Universal Containers has asked the app builder to let sales reps create opportunity records directly from the account, with a number of fields pre-populated. Which feature should the app builder use to allow users to create the opportunity?',
-            'answers': [
-                ('A quick action', True),
-                ('A default action', False),
-                ('A custom button', False),
-                ('A custom link', False)
-            ]
-        },
-        {
             'text': 'A customer service representative at a call center wants to be able to collect information from customers using a series of question prompts. What should an app builder use to accomplish this?',
             'answers': [
                 ('Approval Process', False),
                 ('Flow', True),
                 ('Validation Rule', False),
                 ('Path', False)
-            ]
-        },
-        {
-            'text': 'Universal Containers (UC) requires that all users specify a contract is sent on each Opportunity prior to marking it as "Closed Won". UC wants to be able to report on how many Opportunities have sent Contracts compared to how many have a missing contract when the Opportunities closed. Which field type should an app builder configure to fulfill this requirement?',
-            'answers': [
-                ('Text', False),
-                ('Text Area', False),
-                ('Picklist', False),
-                ('Checkbox', True)
-            ]
-        },
-        {
-            'text': 'Universal Containers created a custom object called Component to capture details about products sold. What approach should an app builder take to show Component as a related list on Product?',
-            'answers': [
-                ('Create a master-detail relationship on Product to Component. Add the Component related list to the Product page layout.', True),
-                ('Create a junction object to relate Component and Product. Add the Component related list to the Product page layout.', False),
-                ('Create a roll-up on Product. Add the Component related list to the Product page layout.', False),
-                ('Create a lookup relationship on Component to Product. Add the Component related list to the Product page layout.', False)
-            ]
-        },
-                {
-            'text': 'An app builder is creating a Lightning record page and has added Mobile & Lightning Actions to the page layout. What two components could be included on the layout to display the actions? Choose 2 answers.',
-            'answers': [
-                ('Highlights panel', True),
-                ('Chatter', False),
-                ('Activities', False),
-                ('Path', True)
             ]
         },
         # Question 71
@@ -146,16 +92,6 @@ def add_crt3(apps, schema_editor):
                 ('Create a text field called "Account Region" on Contact object > Create a workflow rule to update this picklist field if the Account Region field on the Account is changed.', False)
             ]
         },
-        # Question 72
-        {
-            'text': 'Which two features can be used to allow users to access Flows? Choose 2 answers.',
-            'answers': [
-                ('Quick Action', True),
-                ('Approval Process', False),
-                ('Flow Launcher', True),
-                ('Apex', False)
-            ]
-        },
         # Question 73
         {
             'text': 'The CFO of Cloud Kicks needs a way for new vendors to accept terms on agreements for any new major retail store lease before the opportunity can be closed. Which feature should be used to handle this requirement?',
@@ -166,16 +102,6 @@ def add_crt3(apps, schema_editor):
                 ('Validation Rule', False)
             ]
         },
-        # Question 74
-        {
-            'text': 'Universal Containers (UC) tracks Account locations in Zip Code, a custom text field with a validation rule to enforce proper formatting of the US ZIP+4 code for UC\'s orders. What formula should the app builder create on Order to display only the first five digits of Zip Code from the parent Account?',
-            'answers': [
-                ('BEGINS(Account.Zip_Code_r, 5)', False),
-                ('TEXT(Account.Zip_Code_c, 5)', False),
-                ('LEFT(Account.Zip_Code_c, 5)', True),
-                ('LPAD(Account.Zip_Code__r, 5)', False)
-            ]
-        },
         # Question 75
         {
             'text': 'The VP of Sales at Universal Containers has asked the app builder to let sales reps create opportunity records directly from the account, with a number of fields pre-populated. Which feature should the app builder use to allow users to create the opportunity?',
@@ -184,16 +110,6 @@ def add_crt3(apps, schema_editor):
                 ('A default action', False),
                 ('A custom button', False),
                 ('A custom link', False)
-            ]
-        },
-        # Question 76
-        {
-            'text': 'A customer service representative at a call center wants to be able to collect information from customers using a series of question prompts. What should an app builder use to accomplish this?',
-            'answers': [
-                ('Approval Process', False),
-                ('Flow', True),
-                ('Validation Rule', False),
-                ('Path', False)
             ]
         },
         # Question 77
@@ -396,99 +312,6 @@ def add_crt3(apps, schema_editor):
                 ('Lightning component', False),
                 ('Validation rule', False),
                 ('Record triggered flow', True)
-            ]
-        },
-        {
-            'text': "Universal Containers implemented an application process that uses custom objects Internships and Applications. "
-                    "The organization-wide default for Internships has been set to private and is the master in the master-detail "
-                    "relationship with Applications. How should an app builder configure the proper access?",
-            'answers': [
-                ('Set the organization-wide default on the Applications object to Read/Write.', False),
-                ('Add a sharing rule that grants the users Read/Write access to the Internship records.', False),
-                ('Create a queue for the web applications and assign access to the users who will be editing the records.', False),
-                ('Create a sharing rule that grants the users Read/Write access to the Application records.', True)
-            ]
-        },
-        {
-            'text': "An app builder needs to create new automation on an object. What best practice should the app builder follow "
-                    "when building out automation?",
-            'answers': [
-                ('One Workflow rule per object.', False),
-                ('One Flow per object.', False),
-                ('One invocable process per object.', False),
-                ('One record change process per object.', True)
-            ]
-        },
-                {
-            'text': 'The sales Operations team at AWS Computing deletes accounts for a variety of reasons. The sales ops director is worried that the Sales team may delete accounts that sales reps are actively selling into. How should the app builder keep accounts with open opportunities from being deleted?',
-            'answers': [
-                ('Create an Apex Trigger on the Account object', False),
-                ('Create a validation rule on the Account object', True),
-                ('Remove the delete button on the account layout', False),
-                ('Remove the Delete permission from the Sales Rep profile', False)
-            ]
-        },
-        {
-            'text': 'Universal Containers would like to collaborate with its customers within Salesforce, and has decided to enable the "Allow Customer Invitations" Chatter setting. What permission is granted to Customers when invited to Chatter Group?',
-            'answers': [
-                ('The ability to invite members to groups of which they are a member', False),
-                ('The ability to @mention accounts of which they are a contact.', False),
-                ('The ability to request access to public groups', False),
-                ('The ability to interact with members of their groups', True)
-            ]
-        },
-        {
-            'text': 'A business user wants a quick way to edit a record\'s status and enter a custom due date field from the record\'s feed in Salesforce Mobile App. What should be used to accomplish this?',
-            'answers': [
-                ('Custom action', True),
-                ('Custom button', False),
-                ('Custom quick access link', False),
-                ('Custom URL formula Field', False)
-            ]
-        },
-        {
-            'text': 'Ursa Major Solar\'s sales team has been struggling to enter data on mobile since rollout; the team dislikes scrolling through all of the fields to input only the necessary data. How could the app builder solve this with minimal impact to desktop users?',
-            'answers': [
-                ('Filter components by device using Form Factor.', True),
-                ('Reorder the fields to make sense for the reps when in the field.', False),
-                ('Update the training documentation with better screenshots.', False),
-                ('Deselect the phone radio button on the Lightning record page assignment.', False)
-            ]
-        },
-        {
-            'text': 'Universal Containers is setting up Salesforce for the first time. Management wants the sales and marketing teams to have different navigation names in the Salesforce1 mobile app. Which option is available to an app builder to satisfy the requirement?',
-            'answers': [
-                ('Create sales and marketing profiles to ensure read access to different objects', False),
-                ('Create roles for sales and marketing and assign a custom homepage layout for each role.', False),
-                ('Create mobile navigation menus for both the sales and marketing profiles.', True),
-                ('Create public groups for sales and marketing and create mobile navigation menus for each group.', False)
-            ]
-        },
-        {
-            'text': 'Northern Trail Outfitters (NTO) has created the custom objects Trail and Park in Salesforce to track trails and parks respectively. NTO wants to track the total number of trails a park has on the park record without writing any code. Which two actions should an app builder take to accomplish this requirement?',
-            'answers': [
-                ('Use a formula field on the Park record to show the total number of trails.', False),
-                ('Use a roll-up summary field on the Park record to show the total number of Trails.', True),
-                ('Use a master-detail relationship between the Park and Trail objects.', True),
-                ('Use a lookup relationship between the Park and Trail objects.', False)
-            ]
-        },
-        {
-            'text': 'DreamHouse Realty wants to track how many lifts are being installed into customer garages. The To Be Installed custom checkbox field on the custom Lift object should be checked and an external system should be notified via an outbound message the next day when a lift is sold. What automation tool should be used to complete this task?',
-            'answers': [
-                ('Approval process', False),
-                ('Workflow', False),
-                ('Flow', False),
-                ('Process Builder', True)
-            ]
-        },
-        {
-            'text': 'Cloud Kicks (CK) tracks the support level of its customers on the account record page. CK wants to show a text notification on a case record page when the related account is a platinum-level customer. How could an app builder meet this requirement?',
-            'answers': [
-                ('Add a rich text area to the Case Lightning page > Set the component visibility of the rich text area to show when the account support level is platinum.', False),
-                ('Create a text-only Visualforce page > Drag the Visualforce component into the Case page layout > Set its visibility to show when the account support level is platinum.', True),
-                ('Create a text-only Visualforce page > Clone the case page layout > Drag the Visualforce component into the page, and assign the layout to platinum cases.', False),
-                ('Clone the Case Lightning page > Add a rich text area to the new page, and assign this page to platinum accounts.', False)
             ]
         },
         {

@@ -335,7 +335,7 @@ def add_crt5(apps, schema_editor):
                 ('The import wizard only allows value to be imported into a dependent picklist if they match the appropriate controlling field', True),
                 ('Custom picklist field can be either controlling or dependent field', True),
                 ('Multi select picklist can be dependent picklist but not controlling fields', False),
-                ('Standard and custom picklist fields can be dependent fields', True),
+                ('Standard and custom picklist fields can be dependent fields', False),
                 ('Checkbox fields can be controlling fields but not dependent fields', True),
             ]
         },

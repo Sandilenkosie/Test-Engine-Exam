@@ -30,12 +30,12 @@ class Exam(models.Model):
             return mark_safe(f'<img src="{self.image.url}" style="width: 50px; height: auto;" />')
         else:
             # Display a default placeholder image or text
-            return mark_safe('<img src="https://readymadeui.com/cardImg.webp" alt="Default Image" />')
+            return mark_safe('<img src="https://readymadeui.com/cardImg.webp" />')
     
     image_tag.short_description = 'Image Preview'
 
     def __str__(self):
-        return self.titlee
+        return self.title
 
 class Question(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE)

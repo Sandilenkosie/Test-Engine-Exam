@@ -10,7 +10,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_filter = ('exam__title',)
 
 class ExamAdmin(admin.ModelAdmin):
-    list_display = ('image_tag','title',)  # Display fields in list view
+    list_display = ('image','title',)  # Display fields in list view
     search_fields = ('title',)
 
 
