@@ -9,7 +9,7 @@
             {% for exam in exams %}
             <div class="bg-white shadow-lg rounded-lg p-6">
                 <h3 class="text-lg font-semibold mb-2">{{ exam.title }}</h3>
-                <p class="text-sm text-gray-600 mb-4">Description: {{ exam.description|truncatewords:15 }}</p>
+                <p class="text-sm text-gray-600 mb-4">Description: {{ exam.group.description|truncatewords:15 }}</p>
                 <a href="{% url 'take_exam' exam.id %}" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
                     Take Exam
                 </a>

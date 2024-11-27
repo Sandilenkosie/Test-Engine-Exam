@@ -31,15 +31,6 @@ def add_crt1(apps, schema_editor):
                     ]
                 },
                 {
-                    'text': 'Universal Containers has two types of applicants, hourly and salary. How can you ensure the correct record creation?',
-                    'answers': [
-                        ('Create a permission set containing the salary record type and assign it to the appropriate users.', True),
-                        ('Remove "create" permission for the salary applicant object for everyone except the manager and VP.', False),
-                        ('Update the org-wide default to private and create a sharing rule.', False),
-                        ('Configure the hourly record type as the default.', False),
-                    ]
-                },
-                {
                     'text': 'Cloud Kicks works on an annual subscription model. When a sales rep marks an opportunity as closed won, a new opportunity should automatically be created for the renewal. The contracts team works outside of Salesforce but also needs to be notified about closed deals in order to initiate the contract process with the customer. Which automation solution would meet these requirements?',
                     'answers': [
                         ('Approval Process', False),
@@ -174,16 +165,6 @@ def add_crt1(apps, schema_editor):
                         ('Create a roll-up summary field using Support Level on the Account object.', False)
                     ]
                 },
-
-        {
-                    'text': 'Universal Containers has a custom picklist called Support Level on the Account object. They would like to show the real-time value of Support Level on all case records. How should an app builder implement this requirement?',
-                    'answers': [
-                        ('Create a formula field on the Case object using the TEXT function.', True),
-                        ('Create a formula field on the Account object using the ISPICKVAL function.', False),
-                        ('Create a Process Builder and use a field update on the Case object.', False),
-                        ('Create a roll-up summary field using Support Level on the Account object.', False)
-                    ]
-                },
                 {
                     'text': 'Universal Container wants customers to be able to open cases from a public-facing website. What should the app builder use to enable visitors to the website?',
                     'answers': [
@@ -221,15 +202,6 @@ def add_crt1(apps, schema_editor):
                     ]
                 },
                 {
-                    'text': 'Universal Containers has a custom picklist called Support Level on the Account object. They would like to show the real-time value of Support Level on all case records. How should an app builder implement this requirement?',
-                    'answers': [
-                        ('Create a formula field on the Case object using the TEXT function.', True),
-                        ('Create a formula field on the Account object using the ISPICKVAL function.', False),
-                        ('Create a Process Builder and use a field update on the Case object.', False),
-                        ('Create a roll-up summary field using Support Level on the Account object.', False)
-                    ]
-                },
-                        {
                     'text': "Universal Containers implemented an application process that uses custom objects Internships and Applications. "
                             "The organization-wide default for Internships has been set to private and is the master in the master-detail "
                             "relationship with Applications. How should an app builder configure the proper access?",

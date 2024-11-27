@@ -165,7 +165,7 @@ def add_crt4(apps, schema_editor):
                     ('Workflow Rule', False)
                 ]
             },
-                    {
+            {
                 'text': (
                     "The DreamHouse Realty (DR) service manager has asked for some improvements "
                     "in case management to enforce process compliance so that cases are unable to be "
