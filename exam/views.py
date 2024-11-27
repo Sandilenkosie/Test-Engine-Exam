@@ -26,7 +26,8 @@ def group_exam(request, id):
     group = get_object_or_404(Group, id=id)
 
     # Get all exams in the group except the ones the user has already taken
-    exams = group.exams.exclude(id__in=taken_exams).order_by('-id')
+    # exams = group.exams.exclude(id__in=taken_exams).order_by('-id')
+    exams = group.exams.order_by('-id')
 
     context = {
         'group': group,
@@ -60,7 +61,7 @@ def take_exam(request, exam_id):
 
                 is_correct = set(selected_answer_ids) == set(correct_answer_ids)
                 if is_correct:
-                    score += 1
+                    score += len(is_correct)
 
                 correct_answers.append({
                     'question': question.text,
@@ -75,7 +76,6 @@ def take_exam(request, exam_id):
                         'correct_answers': list(question.answer_set.filter(is_correct=True).values_list('text', flat=True)),
                         'is_correct': False
                     })
-
             else:
                 selected_answer_id = request.POST.get(f'answer_{question.id}')
                 if selected_answer_id:

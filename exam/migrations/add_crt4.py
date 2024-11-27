@@ -12,16 +12,13 @@ def add_crt4(apps, schema_editor):
             defaults={'description': 'Group for CRM related exams'}
         )
 
-        # Create an exam instance and associate it with the group
         exam = Exam.objects.create(title='#CRM-4 Exam')
 
-        # If you want to add the exam to the group (assuming a many-to-many relation):
         group.exams.add(exam)
 
 
-        # Define questions and answers
         questions_data = [
-        {
+            {
                 'text': 'Cloud Kicks wants to start tracking how many shoe subscriptions have been sold for each shoe catalog. A master-detail relationship exists between the Subscription__c and the Shoe__c objects. Which type of field should an app builder create?',
                 'answers': [
                     ('Roll-up summary field', True),
@@ -93,7 +90,7 @@ def add_crt4(apps, schema_editor):
                     ('Lookup Object', False)
                 ]
             },
-                    {
+            {
                 'text': 'Ursa Major Solar (UMS) is looking to hire some new employees. UMS wants to allow the same applicant to apply for multiple open positions using a single application. What should an app builder recommend to meet these requirements?',
                 'answers': [
                     ('Create a master-detail relationship on Open_Position__c to Application__c', False),
@@ -280,7 +277,7 @@ def add_crt4(apps, schema_editor):
                     ('Use a scheduled Apex job.', False)
                 ]
             },
-                    {
+            {
                 'text': "An app Builder creates an Account validation rule on the Industry field that "
                         "will throw an error if the length of the field is longer than 6 characters. "
                         "Another App Builder creates a workflow rule with a field update that sets "
@@ -489,7 +486,7 @@ def add_crt4(apps, schema_editor):
                     ('Preexisting information in the field will be completely lost.', False),
                 ]
             },
-                    {
+            {
                 'text': 'An app builder has created a new report type but users are unable to select it from the Report Type list when making a new report for records they own. What could be causing this issue?',
                 'answers': [
                     ('Access to the necessary object is unavailable.', False),
@@ -516,7 +513,7 @@ def add_crt4(apps, schema_editor):
                     ('Standard buttons can be overridden, relocated on the detail page, and relabeled.', False)
                 ]
             },
-                    {
+            {
                 'text': 'DreamHouse Realty asks for improvements in case management. They want to enforce process compliance so that cases are unable to be reverted to an earlier status. Which solution should an app builder implement?',
                 'answers': [
                     ('Configure validation rules with help text.', True),

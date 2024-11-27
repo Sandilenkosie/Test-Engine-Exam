@@ -5,7 +5,7 @@
 {% block content %}
 <div class="relative bg-gradient-to-r from-purple-900 to-indigo-800 py-16 font-[sans-serif]">
   <div class="absolute inset-0">
-    <img src="https://readymadeui.com/cardImg.webp" alt="Background Image" class="w-full h-full object-cover opacity-50" />
+    .GH-ST__
   </div>
 
   <div class="relative max-w-screen-xl mx-auto px-8 z-10 text-center text-white">
@@ -28,7 +28,7 @@
             <span class="text-sm block text-gray-400 mb-2">{{exam.created_at|date:"F j, Y"}} | {{exam.updated_at|date:"F j, Y"}}</span>
             <h3 class="text-xl font-bold text-[#333]">{{exam.name}}</h3>
             <hr class="my-6" />
-            <p class="text-gray-400 text-sm">{{ exam.description|truncatechars:50}}</p>
+            <p class="text-gray-400 text-sm">{{ exam.description|truncatechars:500}}</p>
           </div>
         </div>
         </a>

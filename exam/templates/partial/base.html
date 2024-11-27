@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Swiper CSS -->
-    <title>{% block title %}Gh-st|{% endblock %}</title>
+    <title>Gh-st | {% block title %}{% endblock %}</title>
 </head>
 
 <body>
     <header
         class='flex shadow-sm py-3 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
         <div class='flex flex-wrap items-center justify-between lg:gap-y-4 gap-y-6 gap-x-4 w-full'>
-            <a href="javascript:void(0)"><img src="https://readymadeui.com/readymadeui.svg" alt="logo" class='w-36' />
+            <a href="{% url 'index' %}">.GH-ST__
             </a>
 
             <div id="collapseMenu"
@@ -33,8 +33,7 @@
                 <ul
                     class='lg:flex lg:gap-x-10 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
                     <li class='mb-6 hidden max-lg:block'>
-                        <a href="{% url 'index' %}"><img src="https://readymadeui.com/readymadeui.svg" alt="logo"
-                                class='w-36' />
+                        <a href="{% url 'index' %}">.GH-ST__
                         </a>
                     </li>
                     <li class="relative py-3 px-3 transition-colors duration-300 hover:border-black cursor-pointer border-b 

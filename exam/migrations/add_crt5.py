@@ -20,7 +20,7 @@ def add_crt5(apps, schema_editor):
 
         # Define questions and answers
         questions_data = [
-    {
+            {
                 'text': 'Cloud Kicks (CK) is finding sales reps are inconsistent in data entry when deals are won. CK requires that custom shoes are shipped within two weeks after the close date. A custom field called Scheduled Ship Date on the opportunity records the ship date. How should the app builder ensure this field is properly filled out before setting the opportunity to closed won?',
                 'answers': [
                     ('OR(ISPICKVAL(StageName, "Closed Won") && (Scheduled_Ship_Date__c - CloseDate) > 14, ISBLANK(Scheduled_Ship_Date__c))', True),
@@ -114,7 +114,7 @@ def add_crt5(apps, schema_editor):
                 ]
             },
 
-                    {
+            {
                 'text': 'Universal Containers (UC) has large data volumes and is nearing data storage limits. The planned solution is to archive historical data to reduce data storage in Salesforce; however, UC would still like to use reports, queries, and lookups on the archived information. Which two options could meet this requirement?',
                 'answers': [
                     ('Big objects', True),
