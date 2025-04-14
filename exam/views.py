@@ -61,7 +61,9 @@ def take_exam(request, exam_id):
 
                 is_correct = set(selected_answer_ids) == set(correct_answer_ids)
                 if is_correct:
-                    score += len(is_correct)
+                    score += int(is_correct)
+                
+                print(score);
 
                 correct_answers.append({
                     'question': question.text,
