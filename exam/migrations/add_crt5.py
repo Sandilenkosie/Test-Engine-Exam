@@ -7,15 +7,16 @@ def add_crt5(apps, schema_editor):
     Group = apps.get_model('exam', 'Group')
 
     with transaction.atomic():
+        # Create or get the group
         group, created = Group.objects.get_or_create(
             name='CRM-Exams',
             defaults={'description': 'Group for CRM related exams'}
         )
 
-        # Create an exam instance and associate it with the group
+        # Create an exam instance
         exam = Exam.objects.create(title='#CRM-5 Exam')
 
-        # If you want to add the exam to the group (assuming a many-to-many relation):
+        # Associate the exam with the group
         group.exams.add(exam)
 
         # Define questions and answers
@@ -306,8 +307,8 @@ def add_crt5(apps, schema_editor):
                     {
                 'text': 'At Universal Containers, the VP of Service has requested a visual indicator flag on each case, based on the case priority. High-priority cases should be flagged red, medium-priority should be flagged yellow, and low-priority cases should be flagged green. Which formula would accomplish this requirement? Choose 2 answers',
                 'answers': [
-                    ('CASE(Priority, "Low", "img/samples/flag_green.gif", "Medium", "img/samples/flag_yellow.gif", "High", "img/samples/flag_red.gif", "/s.gif")', True),
-                    ('IMAGE(IF(ISPICKVAL(Priority, "Low"), "img/samples/flag_green.gif", IF(ISPICKVAL(Priority, "Medium"), "img/samples/flag_yellow.gif", IF(ISPICKVAL(Priority, "High"), "img/samples/flag_red.gif"))), "Priority Flag")', False),
+                    ('CASE(Priority, "Low", "img/samples/flag_green.gif", "Medium", "img/samples/flag_yellow.gif", "High", "img/samples/flag_red.gif", "/s.gif")', False),
+                    ('IMAGE(IF(ISPICKVAL(Priority, "Low"), "img/samples/flag_green.gif", IF(ISPICKVAL(Priority, "Medium"), "img/samples/flag_yellow.gif", IF(ISPICKVAL(Priority, "High"), "img/samples/flag_red.gif"))), "Priority Flag")', True),
                     ('IF (ISPICKVAL(Priority, "Low"), "img/samples/flag_green.gif", IF(ISPICKVAL(Priority, "Medium"), "img/samples/flag_yellow.gif", IF(ISPICKVAL(Priority,"High"), "img/samples/flag_red.gif", "/s.gif"))) ', False),
                     ('IMAGE (CASE(Priority, "Low", "img/samples/flag_green.gif", "Medium", "img/samples/flag_yellow.gif", "High", "img/samples/flag_red.gif", "Priority Flag")', True),
                 ]
@@ -354,8 +355,8 @@ def add_crt5(apps, schema_editor):
                 'answers': [
                     ('Related record', False),
                     ('Related lists', False),
-                    ('Highlights panel', True),
-                    ('Activities', False),
+                    ('Highlights panel', False),
+                    ('Activities', True),
                 ]
             },
             {

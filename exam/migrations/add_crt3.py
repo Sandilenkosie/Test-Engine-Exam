@@ -61,8 +61,8 @@ def add_crt3(apps, schema_editor):
                 'answers': [
                     ('Highlights panel', True),
                     ('Chatter', False),
-                    ('Activities', False),
-                    ('Path', True)
+                    ('Activities', True),
+                    ('Path', False)
                 ]
             },
             {
@@ -189,8 +189,8 @@ def add_crt3(apps, schema_editor):
             {
                 'text': 'Universal Containers has a new custom object for Invoices that includes an Invoice Number field. After the migration, Salesforce will be the system of record and each new Invoice created in Salesforce must have a unique Invoice Number. How should the app builder configure the Invoice Number field?',
                 'answers': [
-                    ('Create a Text field for the original Invoice Number and an AutoNumber field for the Salesforce Invoice Number.', False),
-                    ('Create a Text field and mark it as a unique external ID field.', True),
+                    ('Create a Text field for the original Invoice Number and an AutoNumber field for the Salesforce Invoice Number.', True),
+                    ('Create a Text field and mark it as a unique external ID field.', False),
                     ('Create a Text field, then change it to AutoNumber after the migration.', False),
                     ('Create an AutoNumber field and migrate the Invoices', False)
                 ]
@@ -364,8 +364,8 @@ def add_crt3(apps, schema_editor):
                 'text': 'Cloud Kicks wants to display 10 key fields at once in a separate section at the top of opportunity records on the desktop. Which component should an app builder add to the record page to enable this functionality?',
                 'answers': [
                     ('Path', False),
-                    ('Highlights Panel', True),
-                    ('Custom Lightning Web Component', False),
+                    ('Highlights Panel', False),
+                    ('Custom Lightning Web Component', True),
                     ('Accordion', False),
                 ],
             },
@@ -428,8 +428,8 @@ def add_crt3(apps, schema_editor):
                 'answers': [
                     ('Refresh the text sandbox and re_display the change set.', False),
                     ('Clone the change set and re_display', False),
-                    ('Rename the change set, add the changes and re_display', False),
-                    ('Update the change set and re_display', True),
+                    ('Rename the change set, add the changes and re_display', True),
+                    ('Update the change set and re_display', False),
                 ],
             },
             {
@@ -516,8 +516,8 @@ def add_crt3(apps, schema_editor):
             {
                 'text': 'An app builder created multiple custom fields, page layouts, and reports in the sandbox and added them to a change set that was deployed to production, the reports were NOT deployed. What should the app builder do?',
                 'answers': [
-                    ('Move the reports to the Unfiled Public Reports folder and add them to a new change set.', False),
-                    ('Move the reports from the Unfiled Public Reports folder and add them to a new change set.', True),
+                    ('Move the reports to the Unfiled Public Reports folder and add them to a new change set.', True),
+                    ('Move the reports from the Unfiled Public Reports folder and add them to a new change set.', False),
                     ('Recreate the reports in production. Reports are not supported in change sets.', False),
                     ('Add the reports to an unmanaged package and install the unmanaged package into production.', False)
                 ]
@@ -606,11 +606,11 @@ def add_crt3(apps, schema_editor):
             {
                 'text': 'Universal Containers allows all employees to submit reviews for leadership using a custom object called Review. These Reviews should only be visible to the HR department and the employee who submitted the record. Which three steps should an app builder take to properly control access to Reviews? Choose 3 answers.',
                 'answers': [
-                    ('Disable Grant Access Using Hierarchies.', False),
-                    ('Add a Master-Detail (User) field on the Review object.', True),
+                    ('Disable Grant Access Using Hierarchies.', True),
+                    ('Add a Master-Detail (User) field on the Review object.', False),
                     ('Create a criteria-based Sharing Rule for the HR Department.', True),
-                    ('Remove Review Read permission from non-HR Department user Profiles.', True),
-                    ('Set organization-wide default to Private.', False)
+                    ('Remove Review Read permission from non-HR Department user Profiles.', False),
+                    ('Set organization-wide default to Private.', True)
                 ]
             },
 

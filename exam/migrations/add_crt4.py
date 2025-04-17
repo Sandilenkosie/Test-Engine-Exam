@@ -138,8 +138,8 @@ def add_crt4(apps, schema_editor):
             {
                 'text': 'Cloud Kicks received a new requirement to calculate summaries from child objects of a standard object. The team would prefer to solve this declaratively. What are two considerations an app builder should evaluate?',
                 'answers': [
-                    ('An app builder is unable to change a lookup to a master-detail relationship.', True),
-                    ('An object can have up to two master-detail relationships.', False),
+                    ('An app builder is unable to change a lookup to a master-detail relationship.', False),
+                    ('An object can have up to two master-detail relationships.', True),
                     ('A trigger on save or update can kick off calculations.', False),
                     ('A value is required in all records of the lookup field prior to converting to a master-detail relationship.', True)
                 ]
@@ -209,8 +209,8 @@ def add_crt4(apps, schema_editor):
                 'answers': [
                     ('Salesforce Connect automatically establishes a link between environments.', False),
                     ('Change sets do not include all components and may have to perform some changes manually.', True),
-                    ('Users should be logged out of production when receiving inbound change sets.', True),
-                    ('Transactions will revert if the deployment errors.', False)
+                    ('Users should be logged out of production when receiving inbound change sets.', False),
+                    ('Transactions will revert if the deployment errors.', True)
                 ]
             },
             {
@@ -249,8 +249,8 @@ def add_crt4(apps, schema_editor):
                 'answers': [
                     ('Developer', False),
                     ('Full Copy', False),
-                    ('Developer Pro', False),
-                    ('Partial Data', True)
+                    ('Developer Pro', True),
+                    ('Partial Data', False)
                 ]
             },
             {
@@ -332,8 +332,8 @@ def add_crt4(apps, schema_editor):
                 'answers': [
                     ('AND( ISBLANK(Lead.Owner.Id) )', False),
                     ('NOT(ISNEW() && ISBLANK(Lead.Owner:Queue.Id))', False),
-                    ('AND(ISNEW(), ISBLANK(Lead.Owner:User.Id))', True),
-                    ('NOT(ISBLANK(Lead.Owner:Queue.Id))', False)
+                    ('AND(ISNEW(), ISBLANK(Lead.Owner:User.Id))', False),
+                    ('NOT(ISBLANK(Lead.Owner:Queue.Id))', True)
                 ]
             },
             {
@@ -353,9 +353,9 @@ def add_crt4(apps, schema_editor):
                         "should an app builder use in the approval process?",
                 'answers': [
                     ('Email Alert', True),
-                    ('Outbound Message', False),
+                    ('Outbound Message', True),
                     ('Task', True),
-                    ('Invocable Flow', True),
+                    ('Invocable Flow', False),
                     ('Invocable Process Builder', False)
                 ]
             },
@@ -557,7 +557,7 @@ def add_crt4(apps, schema_editor):
                 'text': 'Universal Containers wants to capture coordinates to deliver containers to remote locations. What type of field should the app builder use?',
                 'answers': [
                     ('Number', False),
-                    ('Geo location', True),
+                    ('Geo  ocation', True),
                     ('Text', False),
                     ('External Lookup', False)
                 ]

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.html import mark_safe
+from django.utils.safestring import mark_safe
 import random
 
 class Group(models.Model):
@@ -10,15 +10,19 @@ class Group(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return "https://ui-avatars.com/api/?name=Blue+Ghost"
+
     def image_tag(self):
-        if self.image:
-            return mark_safe(f'<img src="{self.image.url}" style="width: 50px; height: auto;" />')
-        return "No Image"
+        return mark_safe(f'<img src="{self.get_image_url()}" style="width: auto; height: auto;" />')
 
     image_tag.short_description = 'Image Preview'
 
     def __str__(self):
         return self.name
+
 
 
 class Exam(models.Model):

@@ -12,7 +12,6 @@ def add_ai_specialist(apps, schema_editor):
             name='AI Specialist-Exams',
             defaults={'description': 'Group for AI related exams'}
         )
-
         # Create an exam instance and associate it with the group
         exam = Exam.objects.create(title='#AI Specialist-Exams')
 

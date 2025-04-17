@@ -1,4 +1,4 @@
-from django.db import migrations,transaction
+from django.db import migrations, transaction
 
 def add_set1(apps, schema_editor):
     Exam = apps.get_model('exam', 'Exam')
@@ -11,7 +11,6 @@ def add_set1(apps, schema_editor):
             name='ADM-Exams',
             defaults={'description': 'Group for ADM related exams'}
         )
-
         # Create an exam instance and associate it with the group
         exam = Exam.objects.create(title='#ADM-1 Exam')
 

@@ -107,8 +107,8 @@ def add_crt2(apps, schema_editor):
             'answers': [
                 ('Currency', True),
                 ('Percent', True),
-                ('Date', False),
-                ('Checkbox', True),
+                ('Date', True),
+                ('Checkbox', False),
                 ('Time', False)
             ]
         },
@@ -205,10 +205,10 @@ def add_crt2(apps, schema_editor):
           {
             'text': 'Cloud Kicks wants to summarize the number of open Cases related to an Account, as well as the number of closed Cases to indicate customer support utilization. Which two automation solutions would meet these business requirements? (Choose 2)',
             'answers': [
-                ('AppExchange', False),
-                ('Validation Rule', True),
-                ('Approval Process', True),
-                ('Apex', False)
+                ('AppExchange', True),
+                ('Validation Rule', False),
+                ('Approval Process', False),
+                ('Apex', True)
             ]
         },
         {
@@ -288,9 +288,9 @@ def add_crt2(apps, schema_editor):
             'text': 'An app builder received a request to extend record access beyond the organization-wide defaults configured. Which two features satisfy this requirement? (Choose 2)',
             'answers': [
                 ('Sharing Rules', True),
-                ('Public Groups', False),
+                ('Public Groups', True),
                 ('Permission Set Groups', False),
-                ('Manual Sharing Rules', True)
+                ('Manual Sharing Rules', False)
             ]
         },
                 {
@@ -558,10 +558,10 @@ def add_crt2(apps, schema_editor):
         {
             'text': 'An app builder has modified a Lightning record page for a case and has added an email button item to the page layout; however, users are unable to see the new item on the layout. What are two potential reasons why users are unable to view the item on the Case Lightning record page?',
             'answers': [
-                ('The page layout includes the case feed component', True),
-                ('The email button contains JavaScript', False),
-                ('The case page layout has not been activated', True),
-                ('The email button is hidden by a profile permission', False)
+                ('The page layout includes the case feed component', False),
+                ('The email button contains JavaScript', True),
+                ('The case page layout also contains custom buttons.', False),
+                ('The page layout excludes the case feed component.', True)
             ]
         },
         {
@@ -603,8 +603,8 @@ def add_crt2(apps, schema_editor):
         {
             'text': 'An app builder needs to change the data type of some custom fields. Which two limitations should the app builder be aware of when changing the data type of a custom field? Choose 2 answers.',
             'answers': [
-                ('It is not possible to change the data type of a formula field to any data type.', True),
-                ('It is not possible to change the data type of a field referenced by Apex code.', False),
+                ('It is not possible to change the data type of a formula field to any data type.', False),
+                ('It is not possible to change the data type of a field referenced by Apex code.', True),
                 ('It is not possible to change the data type of a field used as an External ID from number to text.', False),
                 ('It is not possible to change the data type of a Text Area (Long) field to Text.', True)
             ]

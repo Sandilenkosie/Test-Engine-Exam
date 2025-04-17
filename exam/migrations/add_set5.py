@@ -1,4 +1,4 @@
-from django.db import migrations,transaction
+from django.db import migrations, transaction
 
 def add_set5(apps, schema_editor):
     Exam = apps.get_model('exam', 'Exam')
