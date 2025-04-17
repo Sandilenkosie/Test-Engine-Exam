@@ -111,9 +111,9 @@ def add_crt4(apps, schema_editor):
             {
                 'text': 'To increase adoption, Universal Containers is proposing changes to its Salesforce data model to allow easier visibility for sales reps into key metrics. The proposal has three custom objects related to the Account object, one with a master-detail, and two that are not. Each of these objects has 15 fields they would like to summarize on the Account object. What are two considerations for this proposal?',
                 'answers': [
-                    ('Roll-up summaries allow MAX, MIN, SUM, COUNT, and AVG.', True),
+                    ('Roll-up summaries allow MAX, MIN, SUM, COUNT, and AVG.', False),
                     ('An object can have 20 object references.', False),
-                    ('An object can have 25 roll-up summaries.', False),
+                    ('An object can have 25 roll-up summaries.', True),
                     ('Roll-up summaries are limited to master-detail relationships.', True)
                 ]
             },
@@ -271,8 +271,8 @@ def add_crt4(apps, schema_editor):
                     "Account record page. How should an app builder implement this request?"
                 ),
                 'answers': [
-                    ('Create a Lightning Web Component.', True),
-                    ('Install a solution from the AppExchange.', False),
+                    ('Create a Lightning Web Component.', False),
+                    ('Install a solution from the AppExchange.', True),
                     ('Build a Flow that uses API calls.', False),
                     ('Use a scheduled Apex job.', False)
                 ]
