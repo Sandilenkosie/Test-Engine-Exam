@@ -583,8 +583,8 @@ def add_crt5(apps, schema_editor):
                     ('Multiple currencies', False),
                     ('Field-Level Security', True),
                     ('Validation Rules', True),
-                    ('Record type picklist value assignments', False),
-                    ('Decimal places and character limits', True)
+                    ('Record type picklist value assignments', True),
+                    ('Decimal places and character limits', False)
                 ]
             },
                     {
@@ -600,7 +600,7 @@ def add_crt5(apps, schema_editor):
                 'text': 'Universal Containers wants sales reps to get permission from their managers before deleting Opportunities. What can be used to meet these requirements?',
                 'answers': [
                     ('Process Builder with Submit for Approval action.', False),
-                    ('Approval Process with a triggered Flow process.', False),
+                    ('Approval Process with a triggered Flow process.', True),
                     ('Approval Process with Time-Dependent Workflow action.', False),
                     ('Two-step Approval Process.', True),
                 ]

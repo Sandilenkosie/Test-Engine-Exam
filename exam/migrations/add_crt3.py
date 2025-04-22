@@ -208,8 +208,8 @@ def add_crt3(apps, schema_editor):
                 'text': 'Which opportunity standard field is available to be configured directly?',
                 'answers': [
                     ('Forecast category', False),
-                    ('Stage', True),
-                    ('Lead source', True),
+                    ('Stage', False),
+                    ('Lead source', False),
                     ('Type', True)
                 ]
             },
