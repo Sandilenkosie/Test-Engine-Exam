@@ -34,8 +34,8 @@ def add_crt2(apps, schema_editor):
             'answers': [
                 ('Escalation rules', True),
                 ('Flow Builder', False),
-                ('Process Builder', True),
-                ('Scheduled Apex', False)
+                ('Process Builder', False),
+                ('Scheduled Apex', True)
             ]
         },
         {
@@ -43,8 +43,8 @@ def add_crt2(apps, schema_editor):
             'answers': [
                 ('Custom objects are unable to be on the detail side of a master-detail relationship.', False),
                 ('There are already two master-detail relationships on the Invoice Line Item.', True),
-                ('Invoice Line-Item records exist without having the Invoice lookup field populated.', True),
-                ('There is a roll-up summary field on the Invoice object.', False)
+                ('Invoice Line-Item records exist without having the Invoice lookup field populated.', False),
+                ('There is a roll-up summary field on the Invoice object.', True)
             ]
         },
         {

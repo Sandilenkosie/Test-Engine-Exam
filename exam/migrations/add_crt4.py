@@ -271,8 +271,8 @@ def add_crt4(apps, schema_editor):
                     "Account record page. How should an app builder implement this request?"
                 ),
                 'answers': [
-                    ('Create a Lightning Web Component.', False),
-                    ('Install a solution from the AppExchange.', True),
+                    ('Create a Lightning Web Component.', True),
+                    ('Install a solution from the AppExchange.', False),
                     ('Build a Flow that uses API calls.', False),
                     ('Use a scheduled Apex job.', False)
                 ]
