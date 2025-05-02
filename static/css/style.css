@@ -331,7 +331,7 @@
 }
 
 .m-body {
-    background-image: url('/static/img/pexels-tima-miroshnichenko-5380650.jpg');
+    background-image: url('/static/img/background.jpg');
     background-size: cover;
     background-position: center;
     font-family: 'Arial', sans-serif;
@@ -394,7 +394,7 @@
 }
 
 .m-result {
-  background-image: url('/static/img/pexels-tima-miroshnichenko-5380650.jpg');
+  background-image: url('/static/img/background.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Ensure the background image remains fixed */

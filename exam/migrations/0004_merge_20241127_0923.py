@@ -10,6 +10,7 @@ class Migration(migrations.Migration):
         ('exam', 'add_AI'),
         ('exam', 'add_ai_specialist'),
         ('exam', 'add_crt1'),
+        ('exam', 'add_dp1'),
         ('exam', 'add_crt2'),
         ('exam', 'add_crt3'),
         ('exam', 'add_crt4'),
